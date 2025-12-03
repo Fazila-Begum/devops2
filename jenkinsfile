@@ -1,0 +1,26 @@
+pipeline{
+    agent any
+    stages{
+        stage("Build docker image"){
+            steps{
+                echo "buiding docker image "
+                bat "docker image -t myapp"
+            }
+        }   
+        stage("Run Image"){
+            steps{
+                echo "running docker image"
+                bat "docker run -f mycontainer||exit 0"
+                bat "docker run -d -p 5000:5000 mycontainer myapp"
+            }
+        }
+    }
+    post{
+        success{
+            echo "pipeline built sucessfully"
+        }
+        failure{
+            echo "pipeline failed"
+        }
+    }
+}
