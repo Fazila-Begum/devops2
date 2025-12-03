@@ -4,7 +4,7 @@ pipeline{
         stage("Build docker image"){
             steps{
                 echo "buiding docker image "
-                bat "docker image -t myapp"
+                bat "docker build image -t myapp"
             }
         }   
         stage("Run Image"){
